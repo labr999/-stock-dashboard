@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 股票決策儀表板</title>
+<style>
+:root{
+  --bg:#0b1220; --panel:#111a2c; --panel2:#0e1626; --line:#1f2b42;
+  --ink:#e8edf7; --sub:#8a97b3; --accent:#3fd0c9; --accent2:#f2a950;
+  --up:#ef5b5b; --down:#3fbf6f; --violet:#8b7bff;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f4f6fb; --panel:#ffffff; --panel2:#eef1f8; --line:#dde3ef; --ink:#131a2a; --sub:#5c6780;
+  }
+}
+:root[data-theme="dark"]{ --bg:#0b1220; }
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;}
+.wrap{max-width:1180px;margin:0 auto;padding:14px;}
+.topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;}
+h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.02em;}
+.toggle{display:flex;background:var(--panel2);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.toggle button{border:0;background:transparent;color:var(--sub);padding:8px 16px;font-size:13px;cursor:pointer;font-weight:600;}
+.toggle button.active{background:var(--accent);color:#04201d;}
+.quote{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:12px;flex-wrap:wrap;}
+.quote .sym{font-size:20px;font-weight:800;}
+.quote .name{color:var(--sub);font-size:13px;}
+.quote .price{font-size:26px;font-weight:800;}
+.quote .chg{font-size:14px;font-weight:700;padding:3px 8px;border-radius:6px;}
+.chg.up{color:var(--up);background:rgba(239,91,91,.12);}
+.chg.down{color:var(--down);background:rgba(63,191,111,.12);}
+.stat{font-size:12px;color:var(--sub);}
+.stat b{color:var(--ink);font-size:13px;display:block;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;}
+.card h3{margin:0 0 10px;font-size:13px;color:var(--sub);font-weight:700;}
+.score{display:flex;align-items:center;gap:14px;}
+.score .num{font-size:34px;font-weight:800;color:var(--accent);}
+.score .lab{font-size:12px;color:var(--sub);}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;background:var(--panel2);color:var(--accent2);border:1px solid var(--line);margin-left:6px;}
+.rows{display:flex;flex-direction:column;gap:8px;font-size:13px;}
+.rows .r{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding-bottom:6px;}
+.rows .r span:last-child{font-weight:700;}
+.bar{height:8px;border-radius:5px;background:var(--panel2);overflow:hidden;margin-top:4px;}
+.bar i{display:block;height:100%;border-radius:5px;background:var(--accent);}
+.foot{margin-top:14px;color:var(--sub);font-size:11px;text-align:center;}
+canvas{width:100%;height:150px;display:block;}
+.legend{display:flex;gap:10px;font-size:11px;color:var(--sub);margin-top:6px;flex-wrap:wrap;}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <h1>AI 股票決策儀表板 <span class="badge" id="liveBadge" style="display:none">自動更新中</span></h1>
+    <div class="toggle">
+      <button id="btnTW" class="active">🇹🇼 台股</button>
+      <button id="btnUS">🇺🇸 美股</button>
+    </div>
+  </div>
+
+  <div class="quote" id="quote"></div>
+  <div class="foot" id="asof" style="margin:-6px 0 12px;text-align:left"></div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>AI 決策核心</h3>
+      <div class="score"><div class="num" id="scoreNum">--</div><div class="lab">綜合評分（0–100）<span class="badge" id="scoreGrade">B</span></div></div>
+      <div class="rows" style="margin-top:12px" id="coreRows"></div>
+    </div>
+
+    <div class="card">
+      <h3>K 線走勢（近 20 日，模擬）</h3>
+      <canvas id="klineCanvas" width="500" height="150"></canvas>
+      <div class="legend"><span><i style="background:var(--up)"></i>收盤</span><span><i style="background:var(--accent)"></i>MA5</span></div>
+    </div>
+
+    <div class="card">
+      <h3>多維度判讀</h3>
+      <canvas id="radarCanvas" width="300" height="220"></canvas>
+    </div>
+
+    <div class="card">
+      <h3>資金流向（近 5 日）</h3>
+      <canvas id="flowCanvas" width="500" height="150"></canvas>
+      <div class="legend" id="flowLegend"></div>
+    </div>
+
+    <div class="card">
+      <h3>籌碼與健康度</h3>
+      <div class="rows" id="chipRows"></div>
+    </div>
+
+    <div class="card">
+      <h3>市場情緒 / 信心度</h3>
+      <div class="rows" id="sentRows"></div>
+    </div>
+  </div>
+
+  <div class="foot">報價／基本面數字為 Yahoo 奇摩股市與市場資料的靜態快照（非即時），K線、雷達、資金流仍為示意模擬資料。瀏覽器無法直接對 Yahoo/Google Finance 發送跨網域即時請求，需自建後端代理或串接授權資料源才能做到真即時更新。</div>
+</div>
+
+<script>
+const DATA = {
+  TW: {
+    sym: "6933", name: "AMAX-KY", price: "143.00", chg: 0.50, pct: 0.35,
+    asOf: "2026/01/27 開盤・資料來源：Yahoo奇摩股市",
+    stats: [["成交量","65"],["本益比","25.63（同業 28.05）"],["市值(百萬)","6,077.94"],["董監持股","58.09%"],["所屬集團","鴻海"]],
+    score: 60, grade: "B",
+    core: [["趨勢判斷","中性偏多"],["短期狀態","區間震盪"],["主力行為","調節減碼"],["籌碼結構","偏弱"],["風險等級","1～2 級交易日"]],
+    kline: [300,305,318,330,325,340,352,348,360,355,349,358,362,357,346,350,343,338,345,342],
+    radar: {labels:["趨勢","動能","籌碼","波動性","流動性"], vals:[55,60,48,65,72]},
+    flow: {labels:["09/15","09/16","09/17","09/18","09/19"], series:[
+      {name:"外資", color:"var(--up)", vals:[-92,-82,-181,-40,20]},
+      {name:"投信", color:"var(--accent2)", vals:[0,0,0,3,1]},
+      {name:"自營商", color:"var(--violet)", vals:[-3,-11,-3,-8,2]}
+    ]},
+    chips: [["主力平均成本","300.82（20日 VWAP）"],["籌碼健康度","37 分（偏弱）"],["支撐 / 壓力","185.00 / 135.00"],["隔日沖比重","73%"]],
+    sent: [["AI 信心指數","55%"],["法人資金流","37%"],["散戶情緒","65%"],["市場情緒","中性"]]
+  },
+  US: {
+    sym: "NVDA", name: "NVIDIA Corp", price: "225.11", chg: -0.42, pct: -0.19,
+    asOf: "18 Aug 2026 close・Source: market data aggregator",
+    stats: [["Volume","23.67M"],["Open","225.53"],["High","227.92"],["Low","224.86"],["YTD range","164.28–236.54"]],
+    score: 74, grade: "A-",
+    core: [["Trend","Bullish"],["Short-term","Breakout"],["Institution flow","Accumulating"],["Chip structure","Strong"],["Risk level","Level 2"]],
+    kline: [150,155,158,162,159,165,170,168,175,172,178,176,181,179,183,180,177,182,179,182],
+    radar: {labels:["Trend","Momentum","Chips","Volatility","Liquidity"], vals:[78,82,70,55,90]},
+    flow: {labels:["09/15","09/16","09/17","09/18","09/19"], series:[
+      {name:"Institutional", color:"var(--down)", vals:[120,95,180,60,40]},
+      {name:"ETF flow", color:"var(--accent2)", vals:[10,20,15,8,12]},
+      {name:"Options net", color:"var(--violet)", vals:[30,-10,20,15,25]}
+    ]},
+    chips: [["Avg cost basis","$168.40 (20D VWAP)"],["Chip health","82 (Strong)"],["Support / Resistance","$165 / $190"],["Short interest","4.2%"]],
+    sent: [["AI Confidence","74%"],["Institutional flow","68%"],["Retail sentiment","61%"],["Market mood","Risk-on"]]
+  }
+};
+
+let current = "TW";
+
+function fmtNum(n){ return (n>0?"+":"") + n.toFixed(2); }
+
+function render(){
+  const d = DATA[current];
+  document.getElementById("btnTW").classList.toggle("active", current==="TW");
+  document.getElementById("btnUS").classList.toggle("active", current==="US");
+
+  const up = d.chg >= 0;
+  document.getElementById("quote").innerHTML = `
+    <div class="sym">${d.sym}</div>
+    <div class="name">${d.name}</div>
+    <div class="price">${d.price}</div>
+    <div class="chg ${up?'up':'down'}">${fmtNum(d.chg)} (${fmtNum(d.pct)}%)</div>
+    ${d.stats.map(s=>`<div class="stat">${s[0]}<b>${s[1]}</b></div>`).join("")}
+  `;
+  document.getElementById("asof").textContent = "資料時間 / As of：" + d.asOf;
+
+  document.getElementById("scoreNum").textContent = d.score;
+  document.getElementById("scoreGrade").textContent = d.grade;
+  document.getElementById("coreRows").innerHTML = d.core.map(r=>`<div class="r"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("");
+  document.getElementById("chipRows").innerHTML = d.chips.map(r=>`<div class="r"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("");
+  document.getElementById("sentRows").innerHTML = d.sent.map(r=>{
+    const isPct = /%$/.test(r[1]);
+    const pct = isPct ? parseFloat(r[1]) : null;
+    return `<div class="r"><span>${r[0]}</span><span>${r[1]}</span></div>` + (isPct ? `<div class="bar"><i style="width:${pct}%"></i></div>` : "");
+  }).join("");
+
+  drawKline(d.kline);
+  drawRadar(d.radar);
+  drawFlow(d.flow);
+}
+
+function css(varName){ return getComputedStyle(document.documentElement).getPropertyValue(varName).trim(); }
+function resolveColor(v){ return v.startsWith("var(") ? css(v.slice(4,-1)) : v; }
+
+function drawKline(vals){
+  const c = document.getElementById("klineCanvas");
+  const ctx = c.getContext("2d");
+  const W=c.width, H=c.height, pad=10;
+  ctx.clearRect(0,0,W,H);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const x = i => pad + i*(W-2*pad)/(vals.length-1);
+  const y = v => H-pad - (v-min)/(max-min||1)*(H-2*pad);
+  // line
+  ctx.strokeStyle = resolveColor("var(--up)");
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  vals.forEach((v,i)=> i===0?ctx.moveTo(x(i),y(v)):ctx.lineTo(x(i),y(v)));
+  ctx.stroke();
+  // fill
+  ctx.lineTo(x(vals.length-1),H-pad); ctx.lineTo(x(0),H-pad); ctx.closePath();
+  ctx.fillStyle = resolveColor("var(--up)")+"22";
+  ctx.fill();
+  // MA5
+  const ma5 = vals.map((_,i,arr)=> i<4?null: arr.slice(i-4,i+1).reduce((a,b)=>a+b,0)/5);
+  ctx.strokeStyle = resolveColor("var(--accent)");
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  let started=false;
+  ma5.forEach((v,i)=>{ if(v==null) return; if(!started){ctx.moveTo(x(i),y(v)); started=true;} else ctx.lineTo(x(i),y(v)); });
+  ctx.stroke();
+}
+
+function drawRadar(radar){
+  const c = document.getElementById("radarCanvas");
+  const ctx = c.getContext("2d");
+  const W=c.width, H=c.height, cx=W/2, cy=H/2-6, R=Math.min(W,H)/2-30;
+  ctx.clearRect(0,0,W,H);
+  const n = radar.labels.length;
+  const gridColor = css("--line");
+  ctx.strokeStyle = gridColor; ctx.fillStyle = css("--sub"); ctx.font="10px sans-serif";
+  for(let ring=1; ring<=4; ring++){
+    ctx.beginPath();
+    for(let i=0;i<=n;i++){
+      const ang = -Math.PI/2 + i*2*Math.PI/n;
+      const r = R*ring/4;
+      const px = cx+r*Math.cos(ang), py=cy+r*Math.sin(ang);
+      i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  }
+  // labels
+  radar.labels.forEach((lab,i)=>{
+    const ang = -Math.PI/2 + i*2*Math.PI/n;
+    const px = cx+(R+14)*Math.cos(ang), py=cy+(R+14)*Math.sin(ang);
+    ctx.textAlign="center";
+    ctx.fillText(lab, px, py);
+  });
+  // data poly
+  ctx.beginPath();
+  radar.vals.forEach((v,i)=>{
+    const ang = -Math.PI/2 + i*2*Math.PI/n;
+    const r = R*v/100;
+    const px = cx+r*Math.cos(ang), py=cy+r*Math.sin(ang);
+    i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+  });
+  ctx.closePath();
+  ctx.fillStyle = resolveColor("var(--accent)")+"33";
+  ctx.strokeStyle = resolveColor("var(--accent)");
+  ctx.lineWidth=2;
+  ctx.fill(); ctx.stroke();
+}
+
+function drawFlow(flow){
+  const c = document.getElementById("flowCanvas");
+  const ctx = c.getContext("2d");
+  const W=c.width, H=c.height, pad=24;
+  ctx.clearRect(0,0,W,H);
+  const allVals = flow.series.flatMap(s=>s.vals);
+  const maxAbs = Math.max(...allVals.map(Math.abs), 1);
+  const groupW = (W-2*pad)/flow.labels.length;
+  const zeroY = H/2;
+  ctx.strokeStyle = css("--line"); ctx.beginPath(); ctx.moveTo(pad,zeroY); ctx.lineTo(W-pad,zeroY); ctx.stroke();
+  flow.labels.forEach((lab,gi)=>{
+    const gx = pad + gi*groupW;
+    const barW = groupW/(flow.series.length+1);
+    flow.series.forEach((s,si)=>{
+      const v = s.vals[gi];
+      const h = (Math.abs(v)/maxAbs)*(H/2-pad);
+      const bx = gx + si*barW + barW/2;
+      ctx.fillStyle = resolveColor(s.color);
+      if(v>=0) ctx.fillRect(bx, zeroY-h, barW*0.7, h);
+      else ctx.fillRect(bx, zeroY, barW*0.7, h);
+    });
+    ctx.fillStyle = css("--sub"); ctx.font="10px sans-serif"; ctx.textAlign="center";
+    ctx.fillText(lab, gx+groupW/2, H-6);
+  });
+  document.getElementById("flowLegend").innerHTML = flow.series.map(s=>`<span><i style="background:${resolveColor(s.color)}"></i>${s.name}</span>`).join("");
+}
+
+document.getElementById("btnTW").onclick = ()=>{ current="TW"; render(); };
+document.getElementById("btnUS").onclick = ()=>{ current="US"; render(); };
+
+async function loadLiveData(){
+  try{
+    const res = await fetch("./data.json", {cache:"no-store"});
+    if(!res.ok) throw new Error("no data.json");
+    const json = await res.json();
+    ["TW","US"].forEach(mkt=>{
+      const rec = (json[mkt]||[])[0];
+      if(!rec) return;
+      const d = DATA[mkt];
+      d.sym = rec.symbol.replace(/\.(TW|TWO)$/,"");
+      d.price = rec.price.toFixed(2);
+      d.chg = rec.change;
+      d.pct = rec.pct;
+      d.asOf = rec.as_of + "（自動更新・來源：Yahoo Finance / yfinance）";
+      d.stats = [["成交量", rec.volume.toLocaleString()], ["開盤/Open", rec.open], ["最高/High", rec.high], ["最低/Low", rec.low], ["MA5", rec.ma5 ?? "-"]];
+      if(rec.kline && rec.kline.length > 1) d.kline = rec.kline;
+    });
+    document.getElementById("liveBadge").style.display = "inline-block";
+  }catch(e){
+    // data.json 還沒生成、或不是從自己網域開啟（例如 Claude 預覽會擋跨網域請求）→ 維持內建快照
+  }
+  render();
+}
+loadLiveData();
+</script>
+</body>
+</html>
