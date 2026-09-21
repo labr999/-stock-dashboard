@@ -343,6 +343,42 @@ function drawFlow(flow){
   document.getElementById("flowLegend").innerHTML = flow.series.map(s=>`<span><i style="background:${resolveColor(s.color)}"></i>${s.name}</span>`).join("");
 }
 
+const NAME_MAP = {
+  "00878":"國泰永續高股息","00919":"群益台灣精選高息","0050":"元大台灣50","0056":"元大高股息",
+  "00631L":"元大台灣50正2","00403A":"統一台灣高息動能","00981A":"主動統一台灣高息動能",
+  "00982A":"主動群益台灣強棒","00988A":"主動安聯台灣智選","00685L":"群益台灣加權正2",
+  "00830":"國泰費城半導體","00662":"富邦NASDAQ","2449":"京元電子","3711":"日月光投控",
+  "02001L":"元大美債20正2","3653":"健策","00909":"國泰數位支付服務","2454":"聯發科","2330":"台積電"
+};
+function scoreToGrade(s){ if(s>=85)return "A"; if(s>=75)return "A-"; if(s>=65)return "B+"; if(s>=55)return "B"; if(s>=45)return "B-"; if(s>=35)return "C+"; return "C"; }
+function genStockFromRecord(mkt, rec){
+  const cleanSym = rec.symbol.replace(/\.(TW|TWO)$/,"");
+  const pct = rec.pct || 0;
+  const score = Math.max(15, Math.min(90, Math.round(50 + pct*4)));
+  const kline = (rec.kline && rec.kline.length>1) ? rec.kline : [rec.price, rec.price];
+  const lo = Math.min(...kline), hi = Math.max(...kline);
+  const vol = Number(String(rec.volume).replace(/,/g,"")) || 0;
+  return {
+    market: mkt, sym: cleanSym, name: NAME_MAP[cleanSym] || cleanSym,
+    price: rec.price, chg: rec.change, pct: rec.pct,
+    asOf: rec.as_of + "（自動更新・yfinance）",
+    stats: [["成交量/Vol", rec.volume?.toLocaleString?.() ?? rec.volume], ["開盤/Open", rec.open], ["最高/High", rec.high], ["最低/Low", rec.low], ["MA5", rec.ma5 ?? "-"]],
+    score, grade: scoreToGrade(score),
+    core: [["趨勢判斷", pct>=0?"偏多":"偏弱"], ["短期狀態", Math.abs(pct)>3?"劇烈波動":"區間震盪"],
+           ["主力行為","尚未串接法人資料"], ["籌碼結構","中性（示意）"], ["風險等級", Math.abs(pct)>5?"3級":"1～2級"]],
+    kline,
+    radar: {labels:["趨勢","動能","籌碼","波動性","流動性"],
+      vals:[Math.max(0,Math.min(100,50+pct*3)), Math.max(0,Math.min(100,50+pct*4)), 50,
+            Math.max(0,Math.min(100, (hi-lo)/(hi||1)*300)), Math.max(0,Math.min(100, Math.log10(vol+1)*12))]},
+    flow: {labels:["D-4","D-3","D-2","D-1","D0"], series:[
+      {name:"外資（未串接）", color:"var(--up)", vals:[0,0,0,0,0]},
+      {name:"投信（未串接）", color:"var(--accent2)", vals:[0,0,0,0,0]},
+      {name:"自營商（未串接）", color:"var(--violet)", vals:[0,0,0,0,0]}]},
+    chips: [["支撐/壓力", lo.toFixed(2)+" / "+hi.toFixed(2)], ["籌碼健康度","中性（示意）"], ["主力平均成本","－ 尚未串接"], ["隔日沖比重","－"]],
+    sent: [["AI信心指數", score+"%"], ["法人資金流","－"], ["散戶情緒","－"], ["市場情緒", pct>=0?"偏多":"偏弱"]]
+  };
+}
+
 document.querySelectorAll("#marketToggle button").forEach(btn=>{
   btn.onclick=()=>{ marketFilter=btn.dataset.m;
     document.querySelectorAll("#marketToggle button").forEach(b=>b.classList.remove("active"));
@@ -387,13 +423,16 @@ async function loadLiveData(){
       (json[mkt]||[]).forEach(rec=>{
         const cleanSym = rec.symbol.replace(/\.(TW|TWO)$/,"");
         const target = STOCKS.find(s=>s.market===mkt && s.sym===cleanSym);
-        if(!target) return;
         any = true;
-        target.placeholder = false;
-        target.price = rec.price; target.chg = rec.change; target.pct = rec.pct;
-        target.asOf = rec.as_of + "（自動更新・yfinance）";
-        target.stats = [["成交量/Vol", rec.volume.toLocaleString()], ["開盤/Open", rec.open], ["最高/High", rec.high], ["最低/Low", rec.low], ["MA5", rec.ma5 ?? "-"]];
-        if(rec.kline && rec.kline.length>1) target.kline = rec.kline;
+        if(target){
+          target.placeholder = false;
+          target.price = rec.price; target.chg = rec.change; target.pct = rec.pct;
+          target.asOf = rec.as_of + "（自動更新・yfinance）";
+          target.stats = [["成交量/Vol", rec.volume.toLocaleString()], ["開盤/Open", rec.open], ["最高/High", rec.high], ["最低/Low", rec.low], ["MA5", rec.ma5 ?? "-"]];
+          if(rec.kline && rec.kline.length>1) target.kline = rec.kline;
+        } else {
+          STOCKS.push(genStockFromRecord(mkt, rec));
+        }
       });
     });
     if(any) document.getElementById("liveBadge").style.display = "inline-block";
