@@ -19,6 +19,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 import yfinance as yf
+import requests
 
 # 想追蹤的股票，自行增減。台股記得加 .TW（上市）或 .TWO（上櫃）
 WATCHLIST = {
@@ -39,6 +40,75 @@ INDEXES = {
 
 HISTORY_DAYS = "1mo"  # 抓近一個月日K，用來畫K線與算MA
 REQUEST_DELAY_SEC = 0.6  # 每檔之間稍微停一下，降低被 Yahoo 限流的機率
+
+TWSE_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; stock-dashboard-bot/1.0)"}
+
+
+def _parse_int(s) -> Optional[int]:
+    try:
+        return int(str(s).replace(",", "").strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def _twse_json(url_tpl: str, days_back: int = 6):
+    """證交所週末／假日沒有資料，往前多試幾天直到抓到為止。"""
+    from datetime import timedelta
+    now_tpe = datetime.now(timezone.utc) + timedelta(hours=8)  # 粗略換算台北時間
+    for i in range(days_back):
+        d = now_tpe - timedelta(days=i)
+        date_str = d.strftime("%Y%m%d")
+        try:
+            resp = requests.get(url_tpl.format(date=date_str), headers=TWSE_HEADERS, timeout=10)
+            resp.raise_for_status()
+            j = resp.json()
+            if j.get("stat") == "OK" and j.get("data"):
+                return j, date_str
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] TWSE {date_str} 抓取失敗: {e}", file=sys.stderr)
+        time.sleep(0.3)
+    return None, None
+
+
+def fetch_institutional_flows():
+    """三大法人（外資／投信／自營商）買賣超股數，來源：證交所 T86（最新一個交易日快照）。"""
+    j, date_str = _twse_json("https://www.twse.com.tw/rwd/zh/fund/T86?response=json&date={date}&selectType=ALL")
+    if not j:
+        return {}, None
+    fields = j.get("fields", [])
+    idx = {name: i for i, name in enumerate(fields)}
+    out = {}
+    for row in j.get("data", []):
+        try:
+            sym = row[idx["證券代號"]].strip()
+            out[sym] = {
+                "foreign_net": _parse_int(row[idx["外資買賣超股數"]]) if "外資買賣超股數" in idx else None,
+                "trust_net": _parse_int(row[idx["投信買賣超股數"]]) if "投信買賣超股數" in idx else None,
+                "dealer_net": _parse_int(row[idx["自營商買賣超股數"]]) if "自營商買賣超股數" in idx else None,
+            }
+        except Exception:  # noqa: BLE001
+            continue
+    return out, date_str
+
+
+def fetch_margin_snapshot():
+    """融資融券今日餘額，來源：證交所 MI_MARGN，當作籌碼健康度的簡化指標。"""
+    j, date_str = _twse_json("https://www.twse.com.tw/rwd/zh/marginTrading/MI_MARGN?response=json&date={date}&selectType=ALL")
+    if not j:
+        return {}, None
+    fields = j.get("fields", [])
+    idx = {name: i for i, name in enumerate(fields)}
+    out = {}
+    for row in j.get("data", []):
+        try:
+            sym = row[idx["股票代號"]].strip()
+            out[sym] = {
+                "margin_balance": _parse_int(row[idx["融資今日餘額"]]) if "融資今日餘額" in idx else None,
+                "short_balance": _parse_int(row[idx["融券今日餘額"]]) if "融券今日餘額" in idx else None,
+            }
+        except Exception:  # noqa: BLE001
+            continue
+    return out, date_str
 
 
 def _safe_int(v, default=0) -> int:
@@ -138,10 +208,25 @@ def main() -> int:
             result["indexes"].append(idx)
         time.sleep(REQUEST_DELAY_SEC)
 
+    flow_map, flow_date = ({}, None)
+    margin_map, margin_date = ({}, None)
+    if WATCHLIST.get("TW"):
+        flow_map, flow_date = fetch_institutional_flows()
+        margin_map, margin_date = fetch_margin_snapshot()
+        result["institutional_as_of"] = flow_date
+        result["margin_as_of"] = margin_date
+        print(f"[info] 法人買賣超 {len(flow_map)} 檔（{flow_date}）、融資融券 {len(margin_map)} 檔（{margin_date}）", file=sys.stderr)
+
     for market, symbols in WATCHLIST.items():
         for sym in symbols:
             data = fetch_one(sym)
             if data:
+                if market == "TW":
+                    bare = sym.replace(".TW", "").replace(".TWO", "")
+                    if bare in flow_map:
+                        data["institutional"] = flow_map[bare]
+                    if bare in margin_map:
+                        data["margin"] = margin_map[bare]
                 result[market].append(data)
             time.sleep(REQUEST_DELAY_SEC)
 
