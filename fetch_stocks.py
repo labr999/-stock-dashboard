@@ -16,8 +16,16 @@ import yfinance as yf
 
 # 想追蹤的股票，自行增減。台股記得加 .TW（上市）或 .TWO（上櫃）
 WATCHLIST = {
-    "TW": ["6933.TW"],
-    "US": ["NVDA"],
+    "TW": ["6933.TW", "2330.TW"],
+    "US": ["NVDA", "AAPL"],
+}
+
+# 四大指數：台灣加權、道瓊工業、那斯達克、費城半導體
+INDEXES = {
+    "TAIEX": "^TWII",
+    "DJI": "^DJI",
+    "IXIC": "^IXIC",
+    "SOX": "^SOX",
 }
 
 HISTORY_DAYS = "1mo"  # 抓近一個月日K，用來畫K線與算MA
@@ -61,12 +69,33 @@ def fetch_one(symbol: str) -> dict | None:
         return None
 
 
+def fetch_index(label: str, symbol: str) -> dict | None:
+    try:
+        t = yf.Ticker(symbol)
+        hist = t.history(period="5d", interval="1d")
+        if hist.empty:
+            return None
+        last = float(hist["Close"].iloc[-1])
+        prev = float(hist["Close"].iloc[-2]) if len(hist) > 1 else last
+        chg = last - prev
+        pct = (chg / prev * 100) if prev else 0.0
+        return {"label": label, "symbol": symbol, "value": round(last, 2), "change": round(chg, 2), "pct": round(pct, 2)}
+    except Exception as e:  # noqa: BLE001
+        print(f"[error] index {symbol}: {e}", file=sys.stderr)
+        return None
+
+
 def main():
     result = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "indexes": [],
         "TW": [],
         "US": [],
     }
+    for label, symbol in INDEXES.items():
+        idx = fetch_index(label, symbol)
+        if idx:
+            result["indexes"].append(idx)
     for market, symbols in WATCHLIST.items():
         for sym in symbols:
             data = fetch_one(sym)
