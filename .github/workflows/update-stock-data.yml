@@ -21,7 +21,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install yfinance
+        run: pip install yfinance requests
 
       - name: Fetch stock data
         run: python fetch_stocks.py
