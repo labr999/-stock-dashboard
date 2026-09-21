@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-21T05:52:38+00:00",
+  "generated_at": "2026-09-21T06:02:42+00:00",
   "indexes": [
     {
       "label": "TAIEX",
       "symbol": "^TWII",
-      "value": 47712.35,
-      "change": 531.6,
-      "pct": 1.13
+      "value": 47718.84,
+      "change": 538.09,
+      "pct": 1.14
     },
     {
       "label": "DJI",
