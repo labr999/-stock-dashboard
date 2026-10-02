@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T06:25:41+00:00",
+  "generated_at": "2026-10-02T12:56:04+00:00",
   "indexes": [
     {
       "label": "TAIEX",
@@ -68,7 +68,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 1727
+        "dealer_net": -4907
       }
     },
     {
@@ -107,8 +107,8 @@
       "as_of": "2026-10-02",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 596450,
-        "dealer_net": 602528
+        "trust_net": 253678,
+        "dealer_net": 316882
       }
     },
     {
@@ -148,7 +148,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 2698921
+        "dealer_net": 16176609
       }
     },
     {
@@ -187,8 +187,8 @@
       "as_of": "2026-10-02",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 130000,
-        "dealer_net": 5622603
+        "trust_net": 2250000,
+        "dealer_net": 1004754
       }
     },
     {
@@ -228,7 +228,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 180000,
-        "dealer_net": -24686838
+        "dealer_net": -39949733
       }
     },
     {
@@ -267,8 +267,8 @@
       "as_of": "2026-10-02",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 0,
-        "dealer_net": 10025555
+        "trust_net": 9503000,
+        "dealer_net": -3824610
       }
     },
     {
@@ -308,7 +308,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 79164856
+        "dealer_net": 148151059
       }
     },
     {
@@ -347,8 +347,8 @@
       "as_of": "2026-10-02",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 33171,
-        "dealer_net": 74010
+        "trust_net": 224681,
+        "dealer_net": -6001
       }
     },
     {
@@ -388,7 +388,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 24630198
+        "dealer_net": 19908324
       }
     },
     {
@@ -428,7 +428,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 1666970
+        "dealer_net": 4704447
       }
     },
     {
@@ -468,7 +468,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 5675000
+        "dealer_net": 9428000
       }
     },
     {
@@ -508,7 +508,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 7456899
+        "dealer_net": -7935292
       }
     },
     {
@@ -548,7 +548,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -160065
+        "dealer_net": 252000
       }
     },
     {
@@ -588,7 +588,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -508505
+        "dealer_net": -2546230
       }
     },
     {
@@ -627,8 +627,8 @@
       "as_of": "2026-10-02",
       "institutional": {
         "foreign_net": null,
-        "trust_net": -2220000,
-        "dealer_net": -425836
+        "trust_net": -799000,
+        "dealer_net": 94861
       }
     },
     {
@@ -667,8 +667,8 @@
       "as_of": "2026-10-02",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 227400,
-        "dealer_net": 56918
+        "trust_net": -2505594,
+        "dealer_net": 152071
       }
     },
     {
@@ -689,7 +689,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 44000
+        "dealer_net": 14000
       }
     },
     {
@@ -728,8 +728,8 @@
       "as_of": "2026-10-02",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 42000,
-        "dealer_net": 2685
+        "trust_net": 63500,
+        "dealer_net": 848
       }
     },
     {
@@ -769,7 +769,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -516310
+        "dealer_net": -743973
       }
     },
     {
@@ -809,7 +809,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -20004403
+        "dealer_net": -11596932
       }
     },
     {
@@ -849,7 +849,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -97641514
+        "dealer_net": -39348705
       }
     }
   ],
@@ -925,6 +925,6 @@
       "as_of": "2026-10-01"
     }
   ],
-  "institutional_as_of": "20261001",
+  "institutional_as_of": "20261002",
   "margin_as_of": null
 }
