@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T06:41:08+00:00",
+  "generated_at": "2026-10-07T14:03:04+00:00",
   "indexes": [
     {
       "label": "TAIEX",
@@ -11,23 +11,23 @@
     {
       "label": "DJI",
       "symbol": "^DJI",
-      "value": 51521.28,
-      "change": 253.38,
-      "pct": 0.49
+      "value": 51020.82,
+      "change": -500.46,
+      "pct": -0.97
     },
     {
       "label": "IXIC",
       "symbol": "^IXIC",
-      "value": 27599.79,
-      "change": 122.48,
-      "pct": 0.45
+      "value": 27393.93,
+      "change": -205.86,
+      "pct": -0.75
     },
     {
       "label": "SOX",
       "symbol": "^SOX",
-      "value": 13217.82,
-      "change": 45.08,
-      "pct": 0.34
+      "value": 12926.54,
+      "change": -291.28,
+      "pct": -2.2
     }
   ],
   "TW": [
@@ -68,7 +68,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -2254
+        "dealer_net": -2579
       }
     },
     {
@@ -107,8 +107,8 @@
       "as_of": "2026-10-07",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 154586,
-        "dealer_net": 395975
+        "trust_net": 66926,
+        "dealer_net": 447067
       }
     },
     {
@@ -148,7 +148,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -11983030
+        "dealer_net": -35404150
       }
     },
     {
@@ -187,8 +187,8 @@
       "as_of": "2026-10-07",
       "institutional": {
         "foreign_net": null,
-        "trust_net": -40000,
-        "dealer_net": -568186
+        "trust_net": 0,
+        "dealer_net": -9617109
       }
     },
     {
@@ -228,7 +228,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -16328174
+        "dealer_net": -8673986
       }
     },
     {
@@ -268,7 +268,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 22656486
+        "dealer_net": -11944530
       }
     },
     {
@@ -308,7 +308,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 41553499
+        "dealer_net": 21571222
       }
     },
     {
@@ -347,8 +347,8 @@
       "as_of": "2026-10-07",
       "institutional": {
         "foreign_net": null,
-        "trust_net": -863105,
-        "dealer_net": 31675
+        "trust_net": -285010,
+        "dealer_net": -130785
       }
     },
     {
@@ -388,7 +388,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 10597062
+        "dealer_net": -4663800
       }
     },
     {
@@ -428,7 +428,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 6522690
+        "dealer_net": 676380
       }
     },
     {
@@ -468,7 +468,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 14161000
+        "dealer_net": 8318000
       }
     },
     {
@@ -508,7 +508,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -4037620
+        "dealer_net": -9336877
       }
     },
     {
@@ -548,7 +548,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 729991
+        "dealer_net": 562811
       }
     },
     {
@@ -588,7 +588,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -1545375
+        "dealer_net": 3585433
       }
     },
     {
@@ -627,8 +627,8 @@
       "as_of": "2026-10-07",
       "institutional": {
         "foreign_net": null,
-        "trust_net": -335000,
-        "dealer_net": 105747
+        "trust_net": -66829,
+        "dealer_net": 98753
       }
     },
     {
@@ -667,8 +667,8 @@
       "as_of": "2026-10-07",
       "institutional": {
         "foreign_net": null,
-        "trust_net": -1526000,
-        "dealer_net": 103371
+        "trust_net": 31797,
+        "dealer_net": 26468
       }
     },
     {
@@ -689,7 +689,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -14000
+        "dealer_net": -11000
       }
     },
     {
@@ -728,8 +728,8 @@
       "as_of": "2026-10-07",
       "institutional": {
         "foreign_net": null,
-        "trust_net": -14500,
-        "dealer_net": -687
+        "trust_net": -159121,
+        "dealer_net": 2756
       }
     },
     {
@@ -769,7 +769,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -444321
+        "dealer_net": -16193
       }
     },
     {
@@ -809,7 +809,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -6801658
+        "dealer_net": -4059113
       }
     },
     {
@@ -849,23 +849,22 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -1641066
+        "dealer_net": -1743667
       }
     }
   ],
   "US": [
     {
       "symbol": "NVDA",
-      "price": 239.24,
-      "change": 0.34,
-      "pct": 0.14,
-      "open": 242.1,
-      "high": 243.37,
-      "low": 238.93,
-      "volume": 100868800,
-      "ma5": 234.27,
+      "price": 238.57,
+      "change": -0.67,
+      "pct": -0.28,
+      "open": 237.68,
+      "high": 238.9,
+      "low": 237.06,
+      "volume": 16488294,
+      "ma5": 236.3,
       "kline": [
-        223.42,
         218.36,
         218.29,
         210.96,
@@ -884,23 +883,23 @@
         230.86,
         233.95,
         238.9,
-        239.24
+        239.24,
+        238.57
       ],
       "currency": "USD",
-      "as_of": "2026-10-06"
+      "as_of": "2026-10-07"
     },
     {
       "symbol": "AAPL",
-      "price": 333.63,
-      "change": 0.74,
-      "pct": 0.22,
-      "open": 332.28,
-      "high": 334.38,
-      "low": 330.62,
-      "volume": 30425700,
-      "ma5": 332.71,
+      "price": 335.15,
+      "change": 1.52,
+      "pct": 0.46,
+      "open": 337.02,
+      "high": 338.67,
+      "low": 332.79,
+      "volume": 5993503,
+      "ma5": 333.14,
       "kline": [
-        315.34,
         326.57,
         332.27,
         333.08,
@@ -919,12 +918,13 @@
         330.32,
         333.69,
         332.89,
-        333.63
+        333.63,
+        335.15
       ],
       "currency": "USD",
-      "as_of": "2026-10-06"
+      "as_of": "2026-10-07"
     }
   ],
-  "institutional_as_of": "20261006",
+  "institutional_as_of": "20261007",
   "margin_as_of": null
 }
