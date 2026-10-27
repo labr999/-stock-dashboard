@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-10-27T11:14:37+00:00",
+  "generated_at": "2026-10-27T18:28:27+00:00",
   "indexes": [
     {
       "label": "TAIEX",
       "symbol": "^TWII",
-      "value": 46096.23,
-      "change": 54.8,
-      "pct": 0.12
+      "value": 46041.43,
+      "change": -846.34,
+      "pct": -1.81
     },
     {
       "label": "DJI",
       "symbol": "^DJI",
-      "value": 52361.58,
-      "change": 146.42,
-      "pct": 0.28
+      "value": 52364.05,
+      "change": 2.47,
+      "pct": 0.0
     },
     {
       "label": "IXIC",
       "symbol": "^IXIC",
-      "value": 26169.38,
-      "change": 214.04,
-      "pct": 0.82
+      "value": 26453.69,
+      "change": 284.31,
+      "pct": 1.09
     },
     {
       "label": "SOX",
       "symbol": "^SOX",
-      "value": 11083.47,
-      "change": 304.01,
-      "pct": 2.82
+      "value": 11457.6,
+      "change": 374.13,
+      "pct": 3.38
     }
   ],
   "TW": [
@@ -105,7 +105,7 @@
       "as_of": "2026-10-27",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 2420780,
+        "trust_net": 2420415,
         "dealer_net": 1907049
       }
     },
@@ -339,7 +339,7 @@
       "as_of": "2026-10-27",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 677160,
+        "trust_net": 674536,
         "dealer_net": 173317
       }
     },
@@ -651,7 +651,7 @@
       "as_of": "2026-10-27",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 3700227,
+        "trust_net": 3786227,
         "dealer_net": 645473
       }
     },
@@ -711,7 +711,7 @@
       "as_of": "2026-10-27",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 59100,
+        "trust_net": 58300,
         "dealer_net": 19038
       }
     },
@@ -836,16 +836,15 @@
   "US": [
     {
       "symbol": "NVDA",
-      "price": 216.0,
-      "change": 5.04,
-      "pct": 2.39,
-      "open": 213.11,
-      "high": 217.75,
-      "low": 212.61,
-      "volume": 90493500,
-      "ma5": 215.52,
+      "price": 217.54,
+      "change": 1.54,
+      "pct": 0.71,
+      "open": 218.3,
+      "high": 219.19,
+      "low": 215.53,
+      "volume": 52808508,
+      "ma5": 215.74,
       "kline": [
-        227.21,
         228.38,
         230.86,
         233.95,
@@ -864,23 +863,23 @@
         221.97,
         212.21,
         210.96,
-        216.0
+        216.0,
+        217.54
       ],
       "currency": "USD",
-      "as_of": "2026-10-26"
+      "as_of": "2026-10-27"
     },
     {
       "symbol": "AAPL",
-      "price": 343.91,
-      "change": -3.82,
-      "pct": -1.1,
-      "open": 343.92,
-      "high": 347.09,
-      "low": 341.03,
-      "volume": 42667300,
-      "ma5": 344.67,
+      "price": 345.48,
+      "change": 1.57,
+      "pct": 0.46,
+      "open": 343.17,
+      "high": 347.78,
+      "low": 342.39,
+      "volume": 17398699,
+      "ma5": 345.87,
       "kline": [
-        329.4,
         333.02,
         330.32,
         333.69,
@@ -899,10 +898,11 @@
         343.99,
         348.22,
         347.73,
-        343.91
+        343.91,
+        345.48
       ],
       "currency": "USD",
-      "as_of": "2026-10-26"
+      "as_of": "2026-10-27"
     }
   ],
   "institutional_as_of": "20261027",
