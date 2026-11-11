@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T07:21:12+00:00",
+  "generated_at": "2026-11-11T15:28:52+00:00",
   "indexes": [
     {
       "label": "TAIEX",
@@ -11,23 +11,23 @@
     {
       "label": "DJI",
       "symbol": "^DJI",
-      "value": 52231.89,
-      "change": -157.86,
-      "pct": -0.3
+      "value": 52107.6,
+      "change": -124.29,
+      "pct": -0.24
     },
     {
       "label": "IXIC",
       "symbol": "^IXIC",
-      "value": 25065.87,
-      "change": -187.27,
-      "pct": -0.74
+      "value": 25418.44,
+      "change": 352.57,
+      "pct": 1.41
     },
     {
       "label": "SOX",
       "symbol": "^SOX",
-      "value": 9998.33,
-      "change": -35.6,
-      "pct": -0.35
+      "value": 10518.47,
+      "change": 520.14,
+      "pct": 5.2
     }
   ],
   "TW": [
@@ -68,7 +68,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -381
+        "dealer_net": 5956
       }
     },
     {
@@ -107,22 +107,21 @@
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 5634335,
-        "dealer_net": -766472
+        "trust_net": 2385276,
+        "dealer_net": 148895
       }
     },
     {
       "symbol": "00685L.TW",
       "price": 10.54,
-      "change": 1.15,
-      "pct": 12.25,
+      "change": 0.69,
+      "pct": 7.01,
       "open": 10.13,
       "high": 10.54,
       "low": 9.86,
       "volume": 454509791,
-      "ma5": 9.63,
+      "ma5": 9.57,
       "kline": [
-        13.02,
         13.2,
         12.26,
         12.32,
@@ -141,6 +140,7 @@
         9.5,
         8.56,
         9.39,
+        9.85,
         10.54
       ],
       "currency": "TWD",
@@ -148,21 +148,20 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 33481328
+        "dealer_net": 116659079
       }
     },
     {
       "symbol": "0050.TW",
       "price": 103.2,
-      "change": 5.75,
-      "pct": 5.9,
+      "change": 3.5,
+      "pct": 3.51,
       "open": 101.0,
       "high": 103.25,
       "low": 99.8,
       "volume": 123488989,
-      "ma5": 98.03,
+      "ma5": 98.0,
       "kline": [
-        112.4,
         113.0,
         108.9,
         109.0,
@@ -181,28 +180,28 @@
         97.15,
         92.5,
         97.45,
+        99.7,
         103.2
       ],
       "currency": "TWD",
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 8952000,
-        "dealer_net": -24720295
+        "trust_net": 4440000,
+        "dealer_net": 11197808
       }
     },
     {
       "symbol": "0056.TW",
       "price": 53.15,
-      "change": 1.4,
-      "pct": 2.71,
+      "change": 0.85,
+      "pct": 1.63,
       "open": 52.5,
       "high": 53.3,
       "low": 51.75,
       "volume": 34728818,
-      "ma5": 51.88,
+      "ma5": 51.73,
       "kline": [
-        56.84,
         57.86,
         56.54,
         57.03,
@@ -221,28 +220,28 @@
         51.55,
         49.91,
         51.75,
+        52.3,
         53.15
       ],
       "currency": "TWD",
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 894000,
-        "dealer_net": -8302535
+        "trust_net": 944000,
+        "dealer_net": -1224396
       }
     },
     {
       "symbol": "00631L.TW",
       "price": 32.53,
-      "change": 3.63,
-      "pct": 12.56,
+      "change": 2.28,
+      "pct": 7.54,
       "open": 31.11,
       "high": 32.53,
       "low": 30.34,
       "volume": 414959515,
-      "ma5": 29.56,
+      "ma5": 29.44,
       "kline": [
-        39.3,
         39.78,
         37.14,
         37.15,
@@ -261,28 +260,28 @@
         29.21,
         26.3,
         28.9,
+        30.25,
         32.53
       ],
       "currency": "TWD",
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 956000,
-        "dealer_net": 28620650
+        "trust_net": 3762000,
+        "dealer_net": 75947700
       }
     },
     {
       "symbol": "00403A.TW",
       "price": 9.19,
-      "change": 0.7,
-      "pct": 8.24,
+      "change": 0.32,
+      "pct": 3.61,
       "open": 8.95,
       "high": 9.19,
       "low": 8.86,
       "volume": 142983763,
-      "ma5": 8.64,
+      "ma5": 8.6,
       "kline": [
-        10.92,
         11.0,
         10.38,
         10.41,
@@ -301,6 +300,7 @@
         8.46,
         8.0,
         8.49,
+        8.87,
         9.19
       ],
       "currency": "TWD",
@@ -308,7 +308,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -81975081
+        "dealer_net": -5564685
       }
     },
     {
@@ -347,22 +347,21 @@
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 1159750,
-        "dealer_net": -372046
+        "trust_net": 589693,
+        "dealer_net": 160127
       }
     },
     {
       "symbol": "00981A.TW",
       "price": 25.33,
-      "change": 2.27,
-      "pct": 9.84,
+      "change": 1.06,
+      "pct": 4.37,
       "open": 24.65,
       "high": 25.33,
       "low": 24.16,
       "volume": 326622892,
-      "ma5": 23.61,
+      "ma5": 23.43,
       "kline": [
-        31.06,
         31.19,
         29.4,
         29.53,
@@ -381,28 +380,28 @@
         23.05,
         21.46,
         23.06,
+        24.27,
         25.33
       ],
       "currency": "TWD",
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 0,
-        "dealer_net": -32343887
+        "trust_net": 10700000,
+        "dealer_net": -39061157
       }
     },
     {
       "symbol": "00982A.TW",
       "price": 19.5,
-      "change": 1.56,
-      "pct": 8.7,
+      "change": 0.71,
+      "pct": 3.78,
       "open": 19.06,
       "high": 19.5,
       "low": 18.78,
       "volume": 31099445,
-      "ma5": 18.2,
+      "ma5": 18.14,
       "kline": [
-        23.41,
         23.51,
         22.25,
         22.29,
@@ -421,6 +420,7 @@
         17.78,
         16.69,
         17.94,
+        18.79,
         19.5
       ],
       "currency": "TWD",
@@ -428,21 +428,20 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -17649705
+        "dealer_net": -6036723
       }
     },
     {
       "symbol": "00988A.TW",
       "price": 13.48,
-      "change": 0.88,
-      "pct": 6.98,
+      "change": 0.3,
+      "pct": 2.28,
       "open": 13.25,
       "high": 13.48,
       "low": 13.18,
       "volume": 16091256,
-      "ma5": 12.99,
+      "ma5": 12.9,
       "kline": [
-        16.52,
         16.6,
         15.38,
         15.61,
@@ -461,6 +460,7 @@
         13.05,
         12.21,
         12.6,
+        13.18,
         13.48
       ],
       "currency": "TWD",
@@ -468,21 +468,20 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 6728000
+        "dealer_net": 371000
       }
     },
     {
       "symbol": "0052.TW",
       "price": 59.85,
-      "change": 3.6,
-      "pct": 6.4,
+      "change": 2.3,
+      "pct": 4.0,
       "open": 58.2,
       "high": 59.85,
       "low": 57.75,
       "volume": 23122331,
-      "ma5": 56.58,
+      "ma5": 56.54,
       "kline": [
-        65.4,
         65.7,
         63.15,
         63.3,
@@ -501,28 +500,28 @@
         55.9,
         53.15,
         56.25,
+        57.55,
         59.85
       ],
       "currency": "TWD",
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 350000,
-        "dealer_net": -5997740
+        "trust_net": 550000,
+        "dealer_net": 964021
       }
     },
     {
       "symbol": "00830.TW",
       "price": 75.25,
-      "change": 6.75,
-      "pct": 9.85,
+      "change": 2.45,
+      "pct": 3.37,
       "open": 73.75,
       "high": 75.25,
       "low": 73.45,
       "volume": 11307325,
-      "ma5": 72.34,
+      "ma5": 71.54,
       "kline": [
-        86.65,
         87.1,
         83.35,
         83.95,
@@ -541,6 +540,7 @@
         73.2,
         67.95,
         68.5,
+        72.8,
         75.25
       ],
       "currency": "TWD",
@@ -548,21 +548,20 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -1783990
+        "dealer_net": -3096037
       }
     },
     {
       "symbol": "00662.TW",
-      "price": 114.4,
-      "change": 1.05,
-      "pct": 0.93,
-      "open": 114.0,
-      "high": 114.65,
-      "low": 113.05,
-      "volume": 8857548,
-      "ma5": 116.44,
+      "price": 117.8,
+      "change": 3.4,
+      "pct": 2.97,
+      "open": 117.6,
+      "high": 118.0,
+      "low": 117.25,
+      "volume": 5281711,
+      "ma5": 116.46,
       "kline": [
-        127.15,
         125.6,
         126.55,
         123.25,
@@ -581,15 +580,11 @@
         118.0,
         118.75,
         113.35,
-        114.4
+        114.4,
+        117.8
       ],
       "currency": "TWD",
-      "as_of": "2026-11-09",
-      "institutional": {
-        "foreign_net": null,
-        "trust_net": 0,
-        "dealer_net": -4020332
-      }
+      "as_of": "2026-11-10"
     },
     {
       "symbol": "2449.TW",
@@ -627,8 +622,8 @@
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 238900,
-        "dealer_net": 1410605
+        "trust_net": 19000,
+        "dealer_net": -32834
       }
     },
     {
@@ -667,8 +662,8 @@
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 3614000,
-        "dealer_net": -1048816
+        "trust_net": 747967,
+        "dealer_net": 480458
       }
     },
     {
@@ -689,7 +684,7 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": 111000
+        "dealer_net": -89000
       }
     },
     {
@@ -728,22 +723,21 @@
       "as_of": "2026-11-11",
       "institutional": {
         "foreign_net": null,
-        "trust_net": 279801,
-        "dealer_net": 10429
+        "trust_net": 289100,
+        "dealer_net": 51802
       }
     },
     {
       "symbol": "00909.TW",
       "price": 37.12,
-      "change": 1.41,
-      "pct": 3.95,
+      "change": 0.13,
+      "pct": 0.35,
       "open": 36.84,
       "high": 37.12,
       "low": 36.51,
       "volume": 1008679,
-      "ma5": 36.71,
+      "ma5": 36.56,
       "kline": [
-        44.52,
         44.71,
         41.64,
         42.97,
@@ -762,6 +756,7 @@
         38.12,
         34.86,
         35.71,
+        36.99,
         37.12
       ],
       "currency": "TWD",
@@ -769,21 +764,20 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -252383
+        "dealer_net": -605962
       }
     },
     {
       "symbol": "00878.TW",
       "price": 33.5,
-      "change": 0.73,
-      "pct": 2.23,
+      "change": 0.55,
+      "pct": 1.67,
       "open": 33.21,
       "high": 33.5,
       "low": 32.7,
       "volume": 69957082,
-      "ma5": 32.98,
+      "ma5": 32.85,
       "kline": [
-        35.34,
         35.47,
         35.09,
         35.53,
@@ -802,6 +796,7 @@
         33.03,
         31.99,
         32.77,
+        32.95,
         33.5
       ],
       "currency": "TWD",
@@ -809,21 +804,20 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 1000000,
-        "dealer_net": -42179325
+        "dealer_net": -33868679
       }
     },
     {
       "symbol": "00919.TW",
       "price": 31.22,
-      "change": 0.24,
-      "pct": 0.77,
+      "change": 0.32,
+      "pct": 1.04,
       "open": 30.95,
       "high": 31.22,
       "low": 30.55,
       "volume": 59756425,
-      "ma5": 30.96,
+      "ma5": 30.89,
       "kline": [
-        32.4,
         32.49,
         32.38,
         32.74,
@@ -842,6 +836,7 @@
         31.19,
         30.14,
         30.98,
+        30.9,
         31.22
       ],
       "currency": "TWD",
@@ -849,23 +844,22 @@
       "institutional": {
         "foreign_net": null,
         "trust_net": 0,
-        "dealer_net": -39215288
+        "dealer_net": -11972572
       }
     }
   ],
   "US": [
     {
       "symbol": "NVDA",
-      "price": 168.89,
-      "change": -9.78,
-      "pct": -5.47,
-      "open": 173.97,
-      "high": 174.69,
-      "low": 165.89,
-      "volume": 426599700,
-      "ma5": 183.19,
+      "price": 174.31,
+      "change": 5.42,
+      "pct": 3.21,
+      "open": 172.72,
+      "high": 175.13,
+      "low": 170.77,
+      "volume": 94801735,
+      "ma5": 178.02,
       "kline": [
-        221.3,
         217.23,
         214.13,
         217.09,
@@ -884,23 +878,23 @@
         181.6,
         186.64,
         178.67,
-        168.89
+        168.89,
+        174.31
       ],
       "currency": "USD",
-      "as_of": "2026-11-10"
+      "as_of": "2026-11-11"
     },
     {
       "symbol": "AAPL",
-      "price": 348.51,
-      "change": -2.18,
-      "pct": -0.62,
-      "open": 351.35,
-      "high": 353.87,
-      "low": 346.46,
-      "volume": 29718200,
-      "ma5": 347.05,
+      "price": 353.51,
+      "change": 5.0,
+      "pct": 1.43,
+      "open": 349.58,
+      "high": 354.44,
+      "low": 349.33,
+      "volume": 7996991,
+      "ma5": 347.85,
       "kline": [
-        342.96,
         342.0,
         343.46,
         342.94,
@@ -919,12 +913,13 @@
         344.17,
         342.37,
         350.69,
-        348.51
+        348.51,
+        353.51
       ],
       "currency": "USD",
-      "as_of": "2026-11-10"
+      "as_of": "2026-11-11"
     }
   ],
-  "institutional_as_of": "20261110",
+  "institutional_as_of": "20261111",
   "margin_as_of": null
 }
